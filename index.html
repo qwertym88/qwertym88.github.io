@@ -158,27 +158,27 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-hexo第一课" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-晒鹏鹏的抠图秘籍" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/02/10/hexo第一课/">hexo第一课</a>
+      <a class="article-title" href="/2018/08/02/晒鹏鹏的抠图秘籍/">晒鹏鹏的抠图秘籍</a>
     </h1>
   
 
         
-        <a href="/2018/02/10/hexo第一课/" class="archive-article-date">
-  	<time datetime="2018-02-10T09:30:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-10</time>
+        <a href="/2018/08/02/晒鹏鹏的抠图秘籍/" class="archive-article-date">
+  	<time datetime="2018-08-02T03:27:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-02</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <html><br><head><br>    <meta charset="utf-8"><br>    <style type="text/css"><br>        p{<br>            text-indent: 2em;<br>        }<br>    </style><br></head><br><body><br>    <h1>用hexo搭建一个私人博客（1）</h1><br>    <h3>1.什么是hexo</h3><br>    <p>hexo是一个轻量级的博客框架，相较于其他博客框架，它更加灵活，也更能满足个人的定制欲望缺点自然也是有的，它的组件还不成熟，如评论和目录等还需要第三方的程序实现。如果你比较喜欢社交，那么如新浪微博可能更加适合你，但如果你喜欢独立自主，又爱编程，那么hexo还是一个不错的选择</p><br><br>    <h3>2.如何配置环境</h3><br>    <p>下载git，node.js等需要的环境，可参照<a href="https://hexo.io/zh-cn/docs/" alt="帮助文档" target="_blank">https://hexo.io/zh-cn/docs/</a></p><br><br>    <h3>3.如何开始</h3><br>    <p>按照文档的说明，在随便哪个地方运行hexo init &lt;随便一个名字&gt;,cd &lt;名字&gt;（进入文件夹）,npm install（安装npm环境）</p><br>    <p>如我想建在D盘</p><br>    <img src="/2018/02/10/hexo第一课/1.png"><br>    <p>打开cmd,进入指定文件夹</p><br>    <img src="/2018/02/10/hexo第一课/2.png"><br>    <p>按照指定的步骤执行</p><br>    <img src="/2018/02/10/hexo第一课/3.png"><br>    <p>以下省略</p><br><br>    <h3>4.如何创建文章</h3><br>    <p>个人推荐：直接在/source/_post/中建立一个文本名为.md的文档，建议直接用html编写（原本hexo的一大亮点就在于支持Markdown语法—一个苹果程序员闲的蛋疼搞得，但反正我懒得再学一种语法了，而且这个语法也不如html灵活，全面，正如我这个都是用html写的）</p><br>    <img src="/2018/02/10/hexo第一课/4.png"><br><br>    <h3>5.如何配置信息</h3><br>    <p>在两个地方配置，一是根目录下的_config.yml，二是themes下你选的主题的_config.yml</p><br>    <p>最有可能更改的地方</p><br>    <img src="/2018/02/10/hexo第一课/5.png" alt="设置名字等"><br>    <img src="/2018/02/10/hexo第一课/6.png" alt="theme设置主题，值为themes中主题的文件夹名；depoly设置仓库，也就是网站上线的配置信息"><br>    <p>中国在网站上有极大发言权，一般好看的主题都是made in China，所以也就更好配置了</p><br>    <img src="/2018/02/10/hexo第一课/7.png" alt="主题中的_config.yml一般会有中文提示，按照提示配置就行"><br><br>    <h3>6.总结</h3><br>    <p>我才发现打文章这么累，看来下次你想干什么我还是发视频吧。这一点还没有完，至少这个博客还没有上线。上线推荐用github，毕竟免费。好累呀，不多说了</p><br></body><br></html>
+        <html><br><head><br>    <meta charset="utf-8"><br>    <style type="text/css"><br>        p{<br>            text-indent: 2em;<br>        }<br>    </style><br></head><br><body><br>    <h1>论抠图的正确方式</h1><br>    <p>近来我想抠一些好看的图片下来，却对抠图毫无头绪，本着不想学ps的心态，我研究出来了python+系统自带的画图来抠图的方法</p><br>    <h3>准备材料</h3><br>        <ol><br>            <li>python (2.7x和3.4x都行)</li><br>            <li>pip提前安好PIL(python 3.x 更名pillow(枕头？))</li><br>            <li>我家女神图片一张(随便什么格式)</li><br>        </ol><br>        <img src="/2018/08/02/晒鹏鹏的抠图秘籍/1.jpg"><br>    <h3 id="1">1.转换格式</h3><br>    <p>python运行以下代码</p><br>    <code>from PIL import Image as image<br>        img=image.open(‘1.jpg’)<br>        img.save(“1_1.png”,”PNG”)<br>    </code><br>    <p>打开可见我家女神并无多大变化，还是一样的美</p><br>    <img src="/2018/08/02/晒鹏鹏的抠图秘籍/1_1.png"><br>    <h3 id="2">2.修边</h3><br>    <p>在画图中打开后可见，背景是白色的，我们要想抠图成功，必须让背景与人物反差较大，所以这里我选择了目标人物没有的绿色，变成背景</p><br>    <img src="/2018/08/02/晒鹏鹏的抠图秘籍/1_2_1.png"><br>    <p>可见边缘的杂色还是没有去除掉</p><br>    <p>铅笔，选择框，橡皮擦齐上阵，总算把边缘修好了,裁剪,另存为1_2.png</p><br>    <img src="/2018/08/02/晒鹏鹏的抠图秘籍/1_2.png"><br>    <h3 id="3">3.去除背景</h3><br>    <p>这时的png图片是三通道的，要增加一个alpha通道才能变成透明背景</p><br>    <p>思路：增加alpha通道-&gt;遍历所有的像素-&gt;保存。代码如下：</p><br>    <code>from PIL import Image as image<br>        def deal(file,fileo,dp):<br>            img=image.open(file)<br>            #打开图片<br>            img=img.convert(“RGBA”)<br>            img_blender=image.new(‘RGBA’,img.size,(0,0,0,0))<br>            img=image.blend(img_blender,img,1)<br>            #增加alpha通道<br>            for j in range(img.size[0]):<br>                for k in range(img.size[1]):<br>                    if img.getpixel((j,k))[:3]==dp:<br>                        img.putpixel((j,k),(255,255,255,0))<br>            #更改像素<br>            img.save(fileo)<br>            #保存<br>        deal(‘1_3.png’,’2.png’,(0,128,64))<br>    </code><br>    <h3 id="4">4.成果展示</h3><br>    <img src="/2018/08/02/晒鹏鹏的抠图秘籍/2.png"><br>    <h3>后记</h3><br>    <cite>人生苦短，我用python</cite><br>    <p>本人在此招募以下人才（满足任一点——以逗号区分，不分先后）：</p><br>    <ol><br>        <li>ps特长，3D建模特长，美术、手工好</li><br>        <li>掌握一门编程语言，pascal免谈</li><br>        <li>成绩优秀，会编程，或想学编程</li><br>        <li>只是想多认识个人，做个朋友</li><br>    </ol><br>    <p>联系方式：QQ：2112966311,可选备注自己的想法</p><br></body><br></html>
       
 
       
@@ -191,7 +191,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">hexo</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
         		</li>
       		
 		</ul>
@@ -203,7 +203,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/网页-框架//" class="article-tag-list-link color1">网页 框架</a>
+        			<a href="/categories/网页-素材//" class="article-tag-list-link color1">网页 素材</a>
         		</li>
       		
 		</ul>
@@ -212,7 +212,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2018/02/10/hexo第一课/">展开全文 >></a>
+          <a class="article-more-a" href="/2018/08/02/晒鹏鹏的抠图秘籍/">展开全文 >></a>
         </p>
       
 
@@ -242,6 +242,10 @@
 
 
   
+  
+    <nav id="page-nav">
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+    </nav>
   
 
 
@@ -336,6 +340,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
             
             <div class="clearfix"></div>
