@@ -20,7 +20,7 @@
 <meta property="og:image" content="http://yoursite.com/2018/08/02/晒鹏鹏的抠图秘籍/1_2_1.png">
 <meta property="og:image" content="http://yoursite.com/2018/08/02/晒鹏鹏的抠图秘籍/1_2.png">
 <meta property="og:image" content="http://yoursite.com/2018/08/02/晒鹏鹏的抠图秘籍/2.png">
-<meta property="og:updated_time" content="2018-08-02T04:09:42.037Z">
+<meta property="og:updated_time" content="2018-08-02T04:26:29.039Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="晒鹏鹏的抠图秘籍">
 <meta name="twitter:description" content="p{            text-indent: 2em;        }        论抠图的正确方式    近来我想抠一些好看的图片下来，却对抠图毫无头绪，本着不想学ps的心态，我研究出来了python+系统自带的画图来抠图的方法    准备材料                    python (2.7x和3.4x都行)            pip">
@@ -184,7 +184,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <html><br><head><br>    <meta charset="utf-8"><br>    <style type="text/css"><br>        p{<br>            text-indent: 2em;<br>        }<br>    </style><br></head><br><body><br>    <h1>论抠图的正确方式</h1><br>    <p>近来我想抠一些好看的图片下来，却对抠图毫无头绪，本着不想学ps的心态，我研究出来了python+系统自带的画图来抠图的方法</p><br>    <h3>准备材料</h3><br>        <ol><br>            <li>python (2.7x和3.4x都行)</li><br>            <li>pip提前安好PIL(python 3.x 更名pillow(枕头？))</li><br>            <li>我家女神图片一张(随便什么格式)</li><br>        </ol><br>        <img src="/2018/08/02/晒鹏鹏的抠图秘籍/1.jpg"><br>    <h3 id="1">1.转换格式</h3><br>    <p>python运行以下代码</p><br>    <code>from PIL import Image as image<br>        img=image.open(‘1.jpg’)<br>        img.save(“1_1.png”,”PNG”)<br>    </code><br>    <p>打开可见我家女神并无多大变化，还是一样的美</p><br>    <img src="/2018/08/02/晒鹏鹏的抠图秘籍/1_1.png"><br>    <h3 id="2">2.修边</h3><br>    <p>在画图中打开后可见，背景是白色的，我们要想抠图成功，必须让背景与人物反差较大，所以这里我选择了目标人物没有的绿色，变成背景</p><br>    <img src="/2018/08/02/晒鹏鹏的抠图秘籍/1_2_1.png"><br>    <p>可见边缘的杂色还是没有去除掉</p><br>    <p>铅笔，选择框，橡皮擦齐上阵，总算把边缘修好了,裁剪,另存为1_2.png</p><br>    <img src="/2018/08/02/晒鹏鹏的抠图秘籍/1_2.png"><br>    <h3 id="3">3.去除背景</h3><br>    <p>这时的png图片是三通道的，要增加一个alpha通道才能变成透明背景</p><br>    <p>思路：增加alpha通道-&gt;遍历所有的像素-&gt;保存。代码如下：</p><br>    <code>from PIL import Image as image<br>        def deal(file,fileo,dp):<br>            img=image.open(file)<br>            #打开图片<br>            img=img.convert(“RGBA”)<br>            img_blender=image.new(‘RGBA’,img.size,(0,0,0,0))<br>            img=image.blend(img_blender,img,1)<br>            #增加alpha通道<br>            for j in range(img.size[0]):<br>                for k in range(img.size[1]):<br>                    if img.getpixel((j,k))[:3]==dp:<br>                        img.putpixel((j,k),(255,255,255,0))<br>            #更改像素<br>            img.save(fileo)<br>            #保存<br>        deal(‘1_3.png’,’2.png’,(0,128,64))<br>    </code><br>    <h3 id="4">4.成果展示</h3><br>    <img src="/2018/08/02/晒鹏鹏的抠图秘籍/2.png"><br>    <h3>后记</h3><br>    <cite>人生苦短，我用python</cite><br>    <p>本人在此招募以下人才（满足任一点——以逗号区分，不分先后）：</p><br>    <ol><br>        <li>ps特长，3D建模特长，美术、手工好</li><br>        <li>掌握一门编程语言，pascal免谈</li><br>        <li>成绩优秀，会编程，或想学编程</li><br>        <li>只是想多认识个人，做个朋友</li><br>    </ol><br>    <p>联系方式：QQ：2112966311,可选备注自己的想法</p><br></body><br></html>
+        <html><br><head><br>    <meta charset="utf-8"><br>    <style type="text/css"><br>        p{<br>            text-indent: 2em;<br>        }<br>    </style><br></head><br><body><br>    <h1>论抠图的正确方式</h1><br>    <p>近来我想抠一些好看的图片下来，却对抠图毫无头绪，本着不想学ps的心态，我研究出来了python+系统自带的画图来抠图的方法</p><br>    <h3>准备材料</h3><br>        <ol><br>            <li>python (2.7x和3.4x都行)</li><br>            <li>pip提前安好PIL(python 3.x 更名pillow(枕头？))</li><br>            <li>我家女神图片一张(随便什么格式)</li><br>        </ol><br>        <img src="/2018/08/02/晒鹏鹏的抠图秘籍/1.jpg"><br>    <h3 id="1">1.转换格式</h3><br>    <p>python运行以下代码</p><br>    <pre>from PIL import Image as image<br>        img=image.open(‘1.jpg’)<br>        img.save(“1_1.png”,”PNG”)<br>    </pre><br>    <p>打开可见我家女神并无多大变化，还是一样的美</p><br>    <img src="/2018/08/02/晒鹏鹏的抠图秘籍/1_1.png"><br>    <h3 id="2">2.修边</h3><br>    <p>在画图中打开后可见，背景是白色的，我们要想抠图成功，必须让背景与人物反差较大，所以这里我选择了目标人物没有的绿色，变成背景</p><br>    <img src="/2018/08/02/晒鹏鹏的抠图秘籍/1_2_1.png"><br>    <p>可见边缘的杂色还是没有去除掉</p><br>    <p>铅笔，选择框，橡皮擦齐上阵，总算把边缘修好了,裁剪,另存为1_2.png</p><br>    <img src="/2018/08/02/晒鹏鹏的抠图秘籍/1_2.png"><br>    <h3 id="3">3.去除背景</h3><br>    <p>这时的png图片是三通道的，要增加一个alpha通道才能变成透明背景</p><br>    <p>思路：增加alpha通道-&gt;遍历所有的像素-&gt;保存。代码如下：</p><br>    <pre>from PIL import Image as image<br>        def deal(file,fileo,dp):<br>            img=image.open(file)<br>            #打开图片<br>            img=img.convert(“RGBA”)<br>            img_blender=image.new(‘RGBA’,img.size,(0,0,0,0))<br>            img=image.blend(img_blender,img,1)<br>            #增加alpha通道<br>            for j in range(img.size[0]):<br>                for k in range(img.size[1]):<br>                    if img.getpixel((j,k))[:3]==dp:<br>                        img.putpixel((j,k),(255,255,255,0))<br>            #更改像素<br>            img.save(fileo)<br>            #保存<br>        deal(‘1_3.png’,’2.png’,(0,128,64))<br>    </pre><br>    <h3 id="4">4.成果展示</h3><br>    <img src="/2018/08/02/晒鹏鹏的抠图秘籍/2.png"><br>    <h3>后记</h3><br>    <cite>人生苦短，我用python</cite><br>    <p>本人在此招募以下人才（满足任一点——以逗号区分，不分先后）：</p><br>    <ol><br>        <li>ps特长，3D建模特长，美术、手工好</li><br>        <li>掌握一门编程语言，pascal免谈</li><br>        <li>成绩优秀，会编程，或想学编程</li><br>        <li>只是想多认识个人，做个朋友</li><br>    </ol><br>    <p>联系方式：QQ：2112966311,可选备注自己的想法</p><br></body><br></html>
       
 
       
@@ -580,6 +580,12 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
     </div>
 
 </div>
+    <div id="wrap">
+		<div id="main">
+			<img id="people" src="https://b-ssl.duitang.com/uploads/item/201808/02/20180802183659_wJfuX.png">
+		</div>
+	</div>
+<div id="prompt">大家好,初次见面，我是鸢一折纸，石海鹏的女神哦ο(=•ω＜=)ρ⌒☆，很高兴和大家见面，希望和大家交往^_^</div>
   </div>
 </body>
 </html>
