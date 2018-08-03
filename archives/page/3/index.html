@@ -6,12 +6,12 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>石海鹏的网页</title>
+  <title>Archives | 石海鹏的网页</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="编程辅导&amp;交流">
 <meta property="og:type" content="website">
 <meta property="og:title" content="石海鹏的网页">
-<meta property="og:url" content="http://yoursite.com/page/2/index.html">
+<meta property="og:url" content="http://yoursite.com/archives/page/3/index.html">
 <meta property="og:site_name" content="石海鹏的网页">
 <meta property="og:description" content="编程辅导&amp;交流">
 <meta name="twitter:card" content="summary">
@@ -158,93 +158,71 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-晒鹏鹏的抠图秘籍" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
+  
     
-      <header class="article-header">
-        
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2018" class="archive-year">2018</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2018/02/10/hexo第一课/" class="archive-article-date">
+  	<time datetime="2018-02-10T09:30:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-10</time>
+</a>
+        </div>
+    	 
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/08/02/晒鹏鹏的抠图秘籍/">晒鹏鹏的抠图秘籍</a>
+      <a class="archive-article-title" href="/2018/02/10/hexo第一课/">hexo第一课</a>
     </h1>
   
 
-        
-        <a href="/2018/08/02/晒鹏鹏的抠图秘籍/" class="archive-article-date">
-  	<time datetime="2018-08-02T03:27:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-02</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <html><br><head><br>    <meta charset="utf-8"><br>    <style type="text/css"><br>        p{<br>            text-indent: 2em;<br>        }<br>    </style><br></head><br><body><br>    <h1>论抠图的正确方式</h1><br>    <p>近来我想抠一些好看的图片下来，却对抠图毫无头绪，本着不想学ps的心态，我研究出来了python+系统自带的画图来抠图的方法</p><br>    <h3>准备材料</h3><br>        <ol><br>            <li>python (2.7x和3.4x都行)</li><br>            <li>pip提前安好PIL(python 3.x 更名pillow(枕头？))</li><br>            <li>我家女神图片一张(随便什么格式)</li><br>        </ol><br>        <img src="https://b-ssl.duitang.com/uploads/item/201808/03/20180803111949_KJeFC.thumb.700_0.jpeg"><br>    <h3 id="1">1.转换格式</h3><br>    <p>python运行以下代码</p><br>    <pre>from PIL import Image as image<br>        img=image.open(‘1.jpg’)<br>        img.save(“1_1.png”,”PNG”)<br>    </pre><br>    <p>打开可见我家女神并无多大变化，还是一样的美</p><br>    <img src="https://b-ssl.duitang.com/uploads/item/201808/03/20180803111953_2WYEW.thumb.700_0.png"><br>    <h3 id="2">2.修边</h3><br>    <p>在画图中打开后可见，背景是白色的，我们要想抠图成功，必须让背景与人物反差较大，所以这里我选择了目标人物没有的绿色，变成背景</p><br>    <img src="https://b-ssl.duitang.com/uploads/item/201808/03/20180803112000_MVVWR.thumb.700_0.png"><br>    <p>可见边缘的杂色还是没有去除掉</p><br>    <p>铅笔，选择框，橡皮擦齐上阵，总算把边缘修好了,裁剪,另存为1_2.png</p><br>    <img src="https://b-ssl.duitang.com/uploads/item/201808/03/20180803112055_QSmjA.thumb.700_0.png"><br>    <h3 id="3">3.去除背景</h3><br>    <p>这时的png图片是三通道的，要增加一个alpha通道才能变成透明背景</p><br>    <p>思路：增加alpha通道-&gt;遍历所有的像素-&gt;保存。代码如下：</p><br>    <pre>from PIL import Image as image<br>        def deal(file,fileo,dp):<br>            img=image.open(file)<br>            #打开图片<br>            img=img.convert(“RGBA”)<br>            img_blender=image.new(‘RGBA’,img.size,(0,0,0,0))<br>            img=image.blend(img_blender,img,1)<br>            #增加alpha通道<br>            for j in range(img.size[0]):<br>                for k in range(img.size[1]):<br>                    if img.getpixel((j,k))[:3]==dp:<br>                        img.putpixel((j,k),(255,255,255,0))<br>            #更改像素<br>            img.save(fileo)<br>            #保存<br>        deal(‘1_3.png’,’2.png’,(0,128,64))<br>    </pre><br>    <h3 id="4">4.成果展示</h3><br>    <img src="https://b-ssl.duitang.com/uploads/item/201808/03/20180803112100_aWyhn.thumb.700_0.png"><br>    <h3>后记</h3><br>    <cite>人生苦短，我用python</cite><br>    <p>本人在此招募以下人才（满足任一点——以逗号区分，不分先后）：</p><br>    <ol><br>        <li>ps特长，3D建模特长，美术、手工好</li><br>        <li>掌握一门编程语言，pascal免谈</li><br>        <li>成绩优秀，会编程，或想学编程</li><br>        <li>只是想多认识个人，做个朋友</li><br>    </ol><br>    <p>联系方式：QQ：2112966311,可选备注自己的想法</p><br></body><br></html>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
+        <div class="article-info info-on-right">
+          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">hexo</a>
         		</li>
       		
 		</ul>
 	</div>
 
-      
+          
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/网页-素材//" class="article-tag-list-link color1">网页 素材</a>
+        			<a href="/categories/网页-框架//" class="article-tag-list-link color1">网页 框架</a>
         		</li>
       		
 		</ul>
 	</div>
 
 
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/08/02/晒鹏鹏的抠图秘籍/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
+        </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
   
   
+    </div></section>
+  
+
+    
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/archives/page/2/">&laquo; Prev</a><a class="page-number" href="/archives/">1</a><a class="page-number" href="/archives/page/2/">2</a><span class="page-number current">3</span>
     </nav>
   
 
@@ -268,9 +246,9 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
+		isHome: false,
 		isPost: false,
-		isArchive: false,
+		isArchive: true,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
