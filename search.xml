@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>绘画</title>
+      <link href="/2020/02/23/%E7%BB%98%E7%94%BB/"/>
+      <url>/2020/02/23/%E7%BB%98%E7%94%BB/</url>
+      
+        <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>折腾了一天的东西，由于几乎忘记了hexo的正确使用方法，加上曾经励志一年不编程，所以将最终成果另存了一个仓库而不是嵌套进去。<br>使用了Lazy Line Painter和一个svg绘图网站。<br>原图就是封面的那幅。</p><h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><p><a href="https://shihaipeng.github.io/a/" target="_blank" rel="noopener">传送门</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 笔记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> js </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>关于cubism3模型点击区域的绑定</title>
       <link href="/2019/08/26/%E5%85%B3%E4%BA%8Ecubism3%E6%A8%A1%E5%9E%8B%E7%82%B9%E5%87%BB%E5%8C%BA%E5%9F%9F%E7%9A%84%E7%BB%91%E5%AE%9A/"/>
       <url>/2019/08/26/%E5%85%B3%E4%BA%8Ecubism3%E6%A8%A1%E5%9E%8B%E7%82%B9%E5%87%BB%E5%8C%BA%E5%9F%9F%E7%9A%84%E7%BB%91%E5%AE%9A/</url>
