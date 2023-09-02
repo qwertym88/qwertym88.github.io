@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>oneos体验（一）</title>
+      <link href="/2023/09/02/oneos%E4%BD%93%E9%AA%8C%EF%BC%88%E4%B8%80%EF%BC%89/"/>
+      <url>/2023/09/02/oneos%E4%BD%93%E9%AA%8C%EF%BC%88%E4%B8%80%EF%BC%89/</url>
+      
+        <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>总体上讲，OneOS还是挺不错的。个人感觉当需要做一些综合性的项目，比如简单智能家居时会比较有优势，但更深入一些的就比较麻烦。归根结底，感觉应该是设计理念的原因，即设计的目的就是让写代码的可以从底层代码中解脱出来，只管调用封装好的接口就行，而不需要去了解具体是如何实现的，拿来能用就行，不能用就不管了。像智能家居类的项目就特别符合这种需求，本来每个做智能家居的与其把精力空耗在各个传感器怎么使用，还不如多捣鼓些更高层级的东西。只不过我挺好奇，裸oneos编译出来就快30kb了，真的不打算照顾一下穷哥们吗？</p><h2 id="创建项目"><a href="#创建项目" class="headerlink" title="创建项目"></a>创建项目</h2><ol><li>在/projects文件夹（或含有.config/Kconfig的文件夹下）运行oos project选择开发板</li><li>打开生成的工程文件，运行oos config配置内核</li><li><strong>在drivers-&gt;boot-&gt;cortex-m boot-&gt;board boot configuration配置flash和ram大小，否则可以正常下载但无法运行</strong></li><li>运行oos init -i keil生成keil工程</li></ol><img src="/2023/09/02/oneos体验（一）/1.png"><p>如上，stm32f103c8 Flash64KB，起始地址0x8000000，RAM 20KB，起始地址0x20000000，需要根据该信息修改成如上的样子。</p><h2 id="后续修改"><a href="#后续修改" class="headerlink" title="后续修改"></a>后续修改</h2><hr><ol><li>运行oos config配置组件</li><li>在\board\CubeMX_Config下修改.ioc，配置pwm、时钟等硬件信息</li><li>运行oos init -i keil将配置更新进工程文件中</li></ol><h2 id="延迟函数"><a href="#延迟函数" class="headerlink" title="延迟函数"></a>延迟函数</h2><p>阻塞延迟：os_clocksource_ndelay 纳秒延迟，精度 2ns</p><p>非阻塞延迟：os_task_msleep 微妙睡眠，至少 &gt; 10ms 才是准的，一个时间片 10ms</p><h2 id="clock-source-配置"><a href="#clock-source-配置" class="headerlink" title="clock source 配置"></a>clock source 配置</h2><hr><ol><li>driver-&gt;timer-&gt;cortex-m hardware timer config-&gt;systick for kernel tick/dwt for clocksource</li><li>.ioc文件不需要做任何修改</li><li>按照官方教程用tim软计时器没搞明白，还是用硬件计时器吧</li></ol><img src="/2023/09/02/oneos体验（一）/2.png"><h2 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h2><h3 id="编译报错：-no-space-in-execution-region-with-any-selector-matching-xxx-o"><a href="#编译报错：-no-space-in-execution-region-with-any-selector-matching-xxx-o" class="headerlink" title="编译报错：..no space in execution region with .any selector matching xxx.o"></a>编译报错：..no space in execution region with .any selector matching xxx.o</h3><p>爆flash了，看能砍多少砍多少吧。正常把它那些调试组件+随意几个基础组件加上就能到50kb</p><h3 id="运行报错：hard-fault-in-task-xxx"><a href="#运行报错：hard-fault-in-task-xxx" class="headerlink" title="运行报错：hard fault in task: xxx"></a>运行报错：hard fault in task: xxx</h3><p>还是爆flash了，动态申请内存失败。可以用show_task查看各个任务堆栈使用率，一般使用率调到40%差不多了。不过对于穷人，光是开启shell组件总代码编译出来就能有40kb。</p><h3 id="multiply-define-“aeibeerrno”"><a href="#multiply-define-“aeibeerrno”" class="headerlink" title="multiply define “aeibeerrno”"></a>multiply define “<strong>aeibe</strong>errno”</h3><p>与keil micro c兼容问题，直接修改oneos源码，把那部分注释掉就行（官方答复），至于有啥影响他也不知道，反正能用就行。</p><h3 id="pwm-gpio-iic-spi-can无法使用"><a href="#pwm-gpio-iic-spi-can无法使用" class="headerlink" title="pwm/gpio/iic/spi/can无法使用"></a>pwm/gpio/iic/spi/can无法使用</h3><p>oneos偷偷拿来用了。挺吐槽他这个设计理念的，主打的就一个偷偷的挪用，声张的不要，鬼子进村似的。注意查看无法正常使用的pwm/gpio是不是同时也是iic1,spi1,can1的引脚，是的话那就肯定是被挪用了。但具体是在哪个设置里用了呢，自己找去吧。但这可真是大工程，太难找了，像翻垃圾桶一样地翻，感觉好蠢。而且在device里面查看也不会有这些设备（因为cubemx没开启），但正常功能就是用不了。</p><h2 id="吐槽"><a href="#吐槽" class="headerlink" title="吐槽"></a>吐槽</h2><p>极致糟糕的oneos cube排版，比互联网黑话还意义不明的命名品味。以shell为例，它的配置分开在kernel、debug、drivers、component四个目录下，要不是用过我哪知道分的这么开。搜索功能固然好，但每个配置项的名字与它所掌管的功能还是关系不大。比方说我不开debug功能就不能用shell组件，shell组件输出串口选择在console选项下，这两个名字上都没和shell带半点关联。顺带一提，不开启debug但开启shell，shell的代码也会参与编译。</p><p>pwm驱动有问题。提供的api每次都会重新初始化pwm，但在例如舵机控制中并不希望如此。感觉纯粹是写这部分代码的人没考虑到这点，想省心省力少写几个接口。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 笔记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> stm32 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>esp32学习笔记（四）</title>
       <link href="/2022/07/31/esp32%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89/"/>
       <url>/2022/07/31/esp32%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89/</url>
